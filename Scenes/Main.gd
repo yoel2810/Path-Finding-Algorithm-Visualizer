@@ -25,6 +25,9 @@ func create_grid_cell(x: int, y: int) -> Control:
 	var sprite: Sprite2D = Sprite2D.new()
 	sprite.texture = load("res://icon.svg")
 	cell.add_child(sprite)
+	sprite.scale = Vector2(
+		cell_size.x / sprite.texture.get_width(), cell_size.y / sprite.texture.get_height()
+	)
 
 	# Add the cell as a child of the main node
 	add_child(cell)
