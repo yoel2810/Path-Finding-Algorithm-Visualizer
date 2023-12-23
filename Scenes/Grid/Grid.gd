@@ -19,7 +19,6 @@ func create_grid_cell(x: int, y: int) -> Control:
 	var cell = preload("res://Scenes/GridCell/GridCell.tscn").instantiate()
 
 	cell.position = (Vector2(x * (Globals.cell_size.x + GAP), y * (Globals.cell_size.y + GAP)))
-	print(cell.position)
 
 	add_child(cell)
 

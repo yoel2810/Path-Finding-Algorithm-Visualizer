@@ -6,12 +6,17 @@ const OBSTACLE_COLOR: Color = Color(0, 0, 0)
 const EMPTY_COLOR: Color = Color(1, 1, 1)
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass  # Replace with function body.
+	size = Globals.cell_size
+	var sprite: Sprite2D = get_node("Sprite2D")
+	var scale_vector = Vector2(
+		Globals.cell_size.x / sprite.texture.get_width(),
+		Globals.cell_size.y / sprite.texture.get_height()
+	)
+	sprite.scale = scale_vector
+	sprite.position -= scale_vector * size
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("place_obstacle") and is_hovered:
 		toggle_obstacle()
