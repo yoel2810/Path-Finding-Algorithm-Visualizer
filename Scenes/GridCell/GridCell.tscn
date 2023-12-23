@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://btui1s6je1op"]
+
+[ext_resource type="Texture2D" uid="uid://452xndgd8eq2" path="res://Assets/white.png" id="1_73kmk"]
+[ext_resource type="Script" path="res://Scenes/GridCell/GridCell.gd" id="1_wk2gy"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 55.0
+offset_bottom = 55.0
+script = ExtResource("1_wk2gy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(27.25, 27.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_73kmk")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
