@@ -17,11 +17,6 @@ func _ready() -> void:
 	sprite.position -= scale_vector * size
 
 
-func _process(_delta) -> void:
-	if Input.is_action_just_pressed("place_obstacle") and is_hovered:
-		toggle_obstacle()
-
-
 func _on_mouse_entered() -> void:
 	is_hovered = true
 
@@ -30,8 +25,13 @@ func _on_mouse_exited():
 	is_hovered = false
 
 
-func toggle_obstacle() -> void:
-	is_obstacle = !is_obstacle
+func make_obstacle() -> void:
+	is_obstacle = true
+	update_visual()
+
+
+func make_empty() -> void:
+	is_obstacle = false
 	update_visual()
 
 
