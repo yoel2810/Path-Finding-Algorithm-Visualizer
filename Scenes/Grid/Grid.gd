@@ -1,8 +1,9 @@
 extends Node2D
 
 var grid: Array = []
+var start_cell_index: int = -1
+var end_cell_index: int = -1
 var block_mode: bool = false
-const GAP: int = 0
 
 
 func _ready() -> void:
@@ -20,6 +21,28 @@ func _process(_delta):
 	if current_cell != null and block_mode:
 		current_cell.make_obstacle()
 
+	if Input.is_action_just_pressed("put_special_node"):
+		if start_cell_index == -1:
+			start_cell_index = coordinate_to_index(
+				mouse_coordinates_to_grid_coordinates(mouse_position).x,
+				mouse_coordinates_to_grid_coordinates(mouse_position).y
+			)
+			grid[start_cell_index].make_start()
+		elif end_cell_index == -1:
+			end_cell_index = coordinate_to_index(
+				mouse_coordinates_to_grid_coordinates(mouse_position).x,
+				mouse_coordinates_to_grid_coordinates(mouse_position).y
+			)
+			grid[end_cell_index].make_end()
+
+
+func is_start_cell_initialized() -> bool:
+	return start_cell_index != -1
+
+
+func is_end_cell_initialized() -> bool:
+	return end_cell_index != -1
+
 
 func setup_grid() -> void:
 	for x in range(int(Globals.grid_size.x)):
@@ -29,24 +52,39 @@ func setup_grid() -> void:
 
 
 func create_grid_cell(x: int, y: int) -> Sprite2D:
-	var screen_size = get_viewport_rect().size - Vector2(GAP, GAP) * Globals.grid_size
+	var screen_size = (
+		get_viewport_rect().size - Vector2(Globals.GAP, Globals.GAP) * Globals.grid_size
+	)
 	var cell_size = Vector2(
 		screen_size.x / Globals.grid_size.x, screen_size.y / Globals.grid_size.y
 	)
 	var cell = preload("res://Scenes/GridCell/GridCell.tscn").instantiate()
-	cell.position = Vector2(x * (cell_size.x + GAP), y * (cell_size.y + GAP)) + cell_size / 2
+	cell.position = (
+		Vector2(x * (cell_size.x + Globals.GAP), y * (cell_size.y + Globals.GAP)) + cell_size / 2
+	)
 	add_child(cell)
 	return cell
 
 
 func get_cell_at_position(cellPosition: Vector2) -> Sprite2D:
-	var screen_size = get_viewport_rect().size - Vector2(GAP, GAP) * Globals.grid_size
-	var cell_size = Vector2(
-		screen_size.x / Globals.grid_size.x, screen_size.y / Globals.grid_size.y
-	)
-	var x = int(cellPosition.x / (cell_size.x + GAP))
-	var y = int(cellPosition.y / (cell_size.y + GAP))
-	var cellIndex = y + x * int(Globals.grid_size.y)
+	var grid_coordinates = mouse_coordinates_to_grid_coordinates(cellPosition)
+	var cellIndex = coordinate_to_index(grid_coordinates.x, grid_coordinates.y)
 	if cellIndex < 0 or cellIndex >= grid.size():
 		return null
 	return grid[cellIndex]
+
+
+func mouse_coordinates_to_grid_coordinates(mouse_position: Vector2) -> Vector2:
+	var screen_size = (
+		get_viewport_rect().size - Vector2(Globals.GAP, Globals.GAP) * Globals.grid_size
+	)
+	var cell_size = Vector2(
+		screen_size.x / Globals.grid_size.x, screen_size.y / Globals.grid_size.y
+	)
+	var x = int(mouse_position.x / (cell_size.x + Globals.GAP))
+	var y = int(mouse_position.y / (cell_size.y + Globals.GAP))
+	return Vector2(x, y)
+
+
+func coordinate_to_index(x: int, y: int) -> int:
+	return y + x * int(Globals.grid_size.y)
