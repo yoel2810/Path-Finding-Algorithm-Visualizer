@@ -1,17 +1,15 @@
 extends Sprite2D
 
-enum CellType {
-	EMPTY,
-	OBSTACLE,
-	START,
-	END,
-}
+class_name GridCell
+
+enum CellType { EMPTY, OBSTACLE, START, END, VISITED }
 var cell_type = CellType.EMPTY
 const COLORS: Dictionary = {
 	CellType.EMPTY: Color(1, 1, 1),
 	CellType.OBSTACLE: Color(0, 0, 0),
 	CellType.START: Color(0, 1, 0),
 	CellType.END: Color(1, 0, 0),
+	CellType.VISITED: Color(1, 0.56, 0.9),
 }
 
 
@@ -46,5 +44,16 @@ func make_end() -> void:
 	update_visual()
 
 
+func make_visited() -> void:
+	# if cell_type == CellType.START or cell_type == CellType.END:
+	# 	return
+	cell_type = CellType.VISITED
+	update_visual()
+
+
 func update_visual() -> void:
 	modulate = COLORS[cell_type]
+
+
+func is_obstacle() -> bool:
+	return cell_type == CellType.OBSTACLE

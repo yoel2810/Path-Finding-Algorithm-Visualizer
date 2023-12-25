@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdbuu0nir4fgn"]
+
+[ext_resource type="Script" path="res://Scenes/AlgorithmManager/AlgorithmManager.gd" id="1_ycngt"]
+
+[node name="AlgorithmManager" type="Node2D"]
+script = ExtResource("1_ycngt")
