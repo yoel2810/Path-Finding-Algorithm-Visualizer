@@ -2,10 +2,14 @@ extends Node2D
 
 class_name Grid
 
+signal frame_updated
+
 var grid: Array = []
 var start_cell_index: int = -1
 var end_cell_index: int = -1
 var block_mode: bool = false
+# var frames_number: int = 0
+# var algorithm_speed: int = 1
 
 
 func _ready() -> void:
@@ -13,6 +17,7 @@ func _ready() -> void:
 
 
 func _process(_delta):
+	# frame_updated.emit()
 	if Input.is_action_pressed("place_obstacle"):
 		block_mode = true
 	elif Input.is_action_just_released("place_obstacle"):
@@ -41,8 +46,9 @@ func _process(_delta):
 		if is_start_cell_initialized() and is_end_cell_initialized():
 			var start_cell = get_cell_at_index(start_cell_index)
 			var end_cell = get_cell_at_index(end_cell_index)
-			var algorithm = preload("res://Algorithms/BFSAlgorithm.gd").new()
-			algorithm.find_path(self)
+			var algorithm = preload("res://Scenes/BfsAlgorithm/BfsAlgorithm.tscn").instantiate()
+			add_child(algorithm)
+			await algorithm.find_path(self)
 
 
 func is_start_cell_initialized() -> bool:

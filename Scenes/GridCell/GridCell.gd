@@ -45,8 +45,8 @@ func make_end() -> void:
 
 
 func make_visited() -> void:
-	# if cell_type == CellType.START or cell_type == CellType.END:
-	# 	return
+	if cell_type == CellType.START or cell_type == CellType.END:
+		return
 	cell_type = CellType.VISITED
 	update_visual()
 

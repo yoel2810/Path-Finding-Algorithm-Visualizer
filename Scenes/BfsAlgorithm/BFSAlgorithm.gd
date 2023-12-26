@@ -23,6 +23,8 @@ func find_path(grid: Grid) -> Array:
 			if neighbor not in visited.keys():
 				visited[neighbor] = null
 				grid.get_cell_at_coordinate(neighbor).make_visited()
+				await get_tree().create_timer(0.1).timeout
+
 				queue.append(neighbor)
 
 	# If we reach here, no path found
