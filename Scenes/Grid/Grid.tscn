@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://db4a1o42yh7cl"]
+[gd_scene load_steps=3 format=3 uid="uid://db4a1o42yh7cl"]
 
 [ext_resource type="Script" path="res://Scenes/Grid/Grid.gd" id="1_7o6yh"]
+[ext_resource type="PackedScene" uid="uid://cdbuu0nir4fgn" path="res://Scenes/AlgorithmManager/AlgorithmManager.tscn" id="2_bo3j1"]
 
 [node name="Grid" type="Node2D"]
 script = ExtResource("1_7o6yh")
+
+[node name="AlgorithmManager" parent="." instance=ExtResource("2_bo3j1")]

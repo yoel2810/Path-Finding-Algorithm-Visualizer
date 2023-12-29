@@ -65,3 +65,11 @@ func update_visual() -> void:
 
 func is_obstacle() -> bool:
 	return cell_type == CellType.OBSTACLE
+
+
+func is_visited() -> bool:
+	return cell_type == CellType.VISITED
+
+
+func is_path() -> bool:
+	return cell_type == CellType.PATH
