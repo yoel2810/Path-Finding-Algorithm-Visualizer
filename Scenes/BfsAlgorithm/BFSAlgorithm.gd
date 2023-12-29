@@ -4,6 +4,7 @@ extends Node2D
 # Breadth-First Search pathfinding algorithm
 func find_path(grid: Grid) -> Array:
 	var start = grid.index_to_coordinate(grid.start_cell_index)
+	var parent: Dictionary = {start: null}
 	var end = grid.index_to_coordinate(grid.end_cell_index)
 	var visited: Dictionary = {start: null}
 	grid.get_cell_at_coordinate(start).make_visited()
@@ -14,13 +15,14 @@ func find_path(grid: Grid) -> Array:
 
 		# Placeholder condition to check if we reached the end
 		if current_position == end:
-			return reconstruct_path(start, end)
+			return await reconstruct_path(start, end, parent, grid)
 
 		# Placeholder logic to get neighbors (e.g., in a grid)
 		var neighbors: Array = get_neighbors(current_position, grid)
 
 		for neighbor in neighbors:
 			if neighbor not in visited.keys():
+				parent[neighbor] = current_position
 				visited[neighbor] = null
 				grid.get_cell_at_coordinate(neighbor).make_visited()
 				await get_tree().create_timer(0.01).timeout
@@ -31,10 +33,17 @@ func find_path(grid: Grid) -> Array:
 	return []
 
 
-func reconstruct_path(start: Vector2, end: Vector2) -> Array:
-	# Placeholder function to reconstruct the path
-	# In a real implementation, you'd have the actual path reconstruction logic here
-	return [start, Vector2(start.x + 1, start.y), end]
+func reconstruct_path(start: Vector2, end: Vector2, parent: Dictionary, grid) -> Array:
+	var path: Array = [end]
+	var current_position: Vector2 = end
+
+	while current_position != start:
+		await get_tree().create_timer(0.01).timeout
+		grid.get_cell_at_coordinate(current_position).make_path()
+		current_position = parent[current_position]
+		path.push_front(current_position)
+
+	return path
 
 
 func get_neighbors(position: Vector2, grid: Grid) -> Array:
