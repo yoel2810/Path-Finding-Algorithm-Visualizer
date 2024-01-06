@@ -12,5 +12,5 @@ A grid like path finding algorithm visualizer using the Godot game engine
 * DFBnB (Coming soon)
 
 ## Installasion
-Since the program has only 1 executable the Installasion is very easy.
+Since the program has only 1 executable the Installasion is very easy.<br />
 All you need to do is to go to the releases and download the latest version.
