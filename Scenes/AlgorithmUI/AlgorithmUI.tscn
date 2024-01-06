@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfjj4xcwrb3lu"]
+
+[ext_resource type="Script" path="res://Scenes/AlgorithmUI/AlgorithmUI.gd" id="1_b34n6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhji2"]
+bg_color = Color(0, 0, 0, 0.611765)
+
+[node name="AlgorithmUi" type="CanvasLayer"]
+script = ExtResource("1_b34n6")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 144.0
+offset_bottom = 35.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhji2")
+text = "Algorithm: BFS"
+horizontal_alignment = 1
+vertical_alignment = 1
