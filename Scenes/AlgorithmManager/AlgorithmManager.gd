@@ -2,20 +2,22 @@ extends Node2D
 
 class_name AlgorithmManager
 
-enum Algorithms { BFS, DFS, DFID, ASTAR, DFBNB }
+enum Algorithms { BFS, DFS, DFID, ASTAR, DFBNB, IDASTAR }
 const algorithms_paths: Dictionary = {
 	Algorithms.BFS: "res://Scenes/BfsAlgorithm/BfsAlgorithm.tscn",
 	Algorithms.DFS: "",
 	Algorithms.DFID: "res://Scenes/DfidAlgorithm/DfidAlgorithm.tscn",
 	Algorithms.ASTAR: "res://Scenes/AstarAlgorithm/AstarAlgorithm.tscn",
-	Algorithms.DFBNB: ""
+	Algorithms.DFBNB: "",
+	Algorithms.IDASTAR: ""
 }
 const algorithms_names: Dictionary = {
 	Algorithms.BFS: "BFS",
 	Algorithms.DFS: "DFS",
 	Algorithms.DFID: "DFID",
 	Algorithms.ASTAR: "A*",
-	Algorithms.DFBNB: "DFBNB"
+	Algorithms.DFBNB: "DFBNB",
+	Algorithms.IDASTAR: "IDA*"
 }
 
 var current_algorithm: String = algorithms_paths[Algorithms.BFS]
