@@ -8,7 +8,7 @@ A grid like path finding algorithm visualizer using the Godot game engine
 * BFS
 * DFID
 * DFS (Coming soon)
-* A* (Coming soon)
+* A*
 * DFBnB (Coming soon)
 
 ## Installasion
