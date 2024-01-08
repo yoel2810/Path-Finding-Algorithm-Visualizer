@@ -1,11 +1,13 @@
 extends Node2D
 
+class_name AlgorithmManager
+
 enum Algorithms { BFS, DFS, DFID, ASTAR, DFBNB }
 const algorithms_paths: Dictionary = {
 	Algorithms.BFS: "res://Scenes/BfsAlgorithm/BfsAlgorithm.tscn",
 	Algorithms.DFS: "",
 	Algorithms.DFID: "res://Scenes/DfidAlgorithm/DfidAlgorithm.tscn",
-	Algorithms.ASTAR: "",
+	Algorithms.ASTAR: "res://Scenes/AstarAlgorithm/AstarAlgorithm.tscn",
 	Algorithms.DFBNB: ""
 }
 const algorithms_names: Dictionary = {
@@ -41,8 +43,8 @@ func _process(delta: float) -> void:
 	# 	set_algorithm(Algorithms.DFS)
 	elif Input.is_action_just_pressed("change_to_dfid"):
 		set_algorithm(Algorithms.DFID)
-	# elif Input.is_action_just_pressed("change_to_astar"):
-	# 	set_algorithm(Algorithms.ASTAR)
+	elif Input.is_action_just_pressed("change_to_astar"):
+		set_algorithm(Algorithms.ASTAR)
 	# elif Input.is_action_just_pressed("change_to_dfbnb"):
 	# 	set_algorithm(Algorithms.DFBNB)
 
